@@ -7,7 +7,7 @@ dotenv.load_dotenv(os.path.join(BASE_DIR, ".env"))#Charge .env en tant que Base_
 
 
 
-class Config():
+class Config(): 
     DEBUG = os.environ.get("DEBUG")
 
     

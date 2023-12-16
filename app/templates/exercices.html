@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Exercice 1 : Résultat d'une division par un diviseur donné</h1>
+    <div>
+        <p>Le résultat de la division est : {{resultat}}</p>
+    </div>
+
+    <h1>Exercice 2 : affichage d'un tableau</h1>
+
+    <style type="text/css">
+        .tftable {
+            font-size: 12px;
+            color: #333333;
+            width: 100%;
+            border-width: 1px;
+            border-color: #729ea5;
+            border-collapse: collapse;
+        }
+
+        .tftable th {
+            font-size: 12px;
+            background-color: #acc8cc;
+            border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: #729ea5;
+            text-align: left;
+        }
+
+        .tftable tr {
+            background-color: #d4e3e5;
+        }
+
+        .tftable td {
+            font-size: 12px;
+            border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: #729ea5;
+        }
+
+        .tftable tr:hover {
+            background-color: #ffffff;
+        }
+    </style>
+
+    <table class="tftable" border="1">
+        <tr>
+            <th>Nom_Région</th>
+            <th>Nom_Département</th>
+            <th>Code_Département</th>
+            <th>Nom_Commune</th>
+            <th>Nom_EPCI_en_charge</th>
+            <th>Date_données</th>
+            <th>Longitude</th>
+            <th>Lattitude</th>
+            <th>ID_Parc</th>
+        </tr>
+
+
+        <tbody>{% for region in JSON %}
+            <tr>
+                <td>
+                    {{ region["recordid"] }}
+                </td>
+
+                <td>
+                    {{ region["fields"]["nom_reg"] }}
+
+
+                </td>
+                <td>
+                    {{ region["fields"]["nom_dept"] }}
+                </td>
+                <td>
+                    {{ region["fields"]["dep"] }}
+                </td>
+                <td>
+                    {{ region["fields"]["f_commune_pdl"] }}
+                </td>
+                <td>
+                    {{ region["fields"]["libepci"] }}
+                </td>
+                <td>
+                    {{ region["fields"]["date_des_donnees"] }}
+                </td>
+                <td>
+                    {{ region["fields"]["coordonnees"][0] }}
+                </td>
+                <td>
+                    {{ region["fields"]["coordonnees"][1] }}
+                </td>
+            </tr>{% endfor %}
+        </tbody>
+    </table>
+
+
+</body>
+
+</html>

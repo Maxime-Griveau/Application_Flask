@@ -1,5 +1,4 @@
-# Cours_M2TNAH
-Cours du M2 TNAH de l'Ecole nationale des chrtes 
+# Cours Flask M2 TNAH
 
-## Contenu 
-Ce repertoire contient les cours du M2 TNAH, les codes, les rendus, etc. pour archivage.
+Ce dépot contient l'application Flask créée pour le cours de M2 TNAH
+

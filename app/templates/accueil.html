@@ -1,0 +1,40 @@
+<!-- templates/accueil.html -->
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Factbook</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container">
+    <h1>Bienvenue sur le site du Factbook !</h1>
+        <p>Voici le lien vers le site officiel : <a
+                href="https://www.cia.gov/the-world-factbook/">https://www.cia.gov/the-world-factbook/</a></p>
+        <p>Vous avez choisi d'afficher les informations concernant le pays suivant : {{pays}}</p>
+        <p>La longueur de la chaine de caractère du pays est {{pays|length}} caractères</p> <!-- pays|length compte le nbr de caractères de la chaine pays-->
+        {%if pays|length > 10 %}
+        <p>C'est un long nom de pays !</p>
+        {%else%}
+        <p>C'est un nom de pays court !</p>
+        {%endif%}
+
+<h2>Liste des pays et informations</h2>
+
+{%if dict%}
+<ul>{%for mots in dict%}
+    <li>{{mots.nom}}</li>
+    <li>{{mots.capitale}}</li>
+    <li>{{mots.continent}}</li>
+    {%endfor%}
+{%endif%}
+</ul>
+
+
+
+
+
+</div>
+</body>
+</html>
