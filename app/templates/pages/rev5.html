@@ -1,0 +1,50 @@
+{% extends "partials/conteneur.html" %}
+
+{% block body %}
+
+
+
+
+
+    <div class="container">
+        <h1>Bienvenue sur l'application du Factbook!</h1>
+        <p>Voici le lien vers le site officiel : <a
+                href="https://www.cia.gov/the-world-factbook/">https://www.cia.gov/the-world-factbook/</a></p>
+    
+
+        <h2>Parc de {{commune}} </h2>
+        
+        <tr>
+            <li>
+              Identifiant : {{id}}
+            </li>
+
+            <li>
+               Nom de la région : {{region}}
+            </li>
+            <li>
+                Nom du département : {{departement}}
+            </li>
+            <li>
+                Code du département : {{code_departement}}
+            </li>
+            <li>
+               Nom de la commmune : {{commune}}
+            </li>
+            <li>
+               Nom de l'EPCI : {{EPCI}} 
+            </li>
+            <li>
+                Date des données : {{date}}
+            </li>
+            <li>
+                Longitude : {{longitude}}
+            </li>
+            <li>
+               Lattitude : {{lattitude}}
+            </li>
+        </ul>
+    
+    </div>
+  
+{% endblock %}
