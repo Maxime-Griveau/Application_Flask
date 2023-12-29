@@ -1,0 +1,113 @@
+{% extends "partials/conteneur.html" %}
+
+{% block body %}
+
+
+
+
+
+    <div class="container">
+        <h1>Bienvenue sur l'application du permis de conduire</h1>
+        
+
+        <h2>Vous avez choisi d'afficher les données de n°{{depuis}} à n°{{jusque-1}}</h2>
+        <style type="text/css">
+            .tftable {
+                font-size: 12px;
+                color: #333333;
+                width: 100%;
+                border-width: 1px;
+                border-color: #729ea5;
+                border-collapse: collapse;
+            }
+    
+            .tftable th {
+                font-size: 16px;
+                background-color: #acc8cc;
+                border-width: 1px;
+                padding: 8px;
+                border-style: solid;
+                border-color: #729ea5;
+                text-align: left;
+            }
+    
+            .tftable tr {
+                background-color: #d4e3e5;
+            }
+    
+            .tftable td {
+                font-size: 12px;
+                border-width: 1px;
+                padding: 8px;
+                border-style: solid;
+                border-color: #729ea5;
+            }
+    
+            .tftable tr:hover {
+                background-color: #ffffff;
+            }
+            #row1 {
+               font-size: 14px;
+               font-weight: bold;
+            
+            
+            }
+            
+        </style>
+
+        {% if depuis < jusque %}
+
+        <table class="tftable" border="1">
+            <tr>
+                <th>#</th>
+                <th>Nom de l'auto école</th>
+                <th>Code Postal</th>
+                <th>Ville</th>
+                <th>Adresse</th>
+                <th>Candidats au permis B</th>
+                <th>Taux de réussite (%)</th>
+            
+            </tr>
+         
+           
+   
+            <tbody>{% for index in donnees_combinees[depuis:jusque] %} <!-- Pour chaque tuple dans ma liste de tuple, en prenant comme range les valeur depuis et jusque-->
+                
+               <tr>
+                <td id="row1">
+                  {{loop.index0+depuis}} <!--Affichage de la bonne valeur d'index, on part de zéro et on ajoute la valeur de depuis ; comme ça le numéro de ligne sera cohérent avec ce qui est demandé-->
+                 
+                </td>
+                <td>
+                    {{index[0]}}
+                </td>
+                <td>
+                    {{index[1]}}
+                </td>
+                <td>
+                    {{index[2]}}
+                </td>
+                <td>
+                    {{index[3]}}
+                </td>
+                <td>
+                    {{index[4]}}
+                </td>
+                <td>
+                    {{index[5]}}   % 
+                </td>
+
+               </tr>{%endfor%}
+                
+                    
+               {%else%}
+               <h1>Votre plage de données n'est pas bonne.</h1>
+                 
+              
+            </tbody>
+        </table>
+        
+    </div>
+  
+  {%endif%}
+{% endblock %}
