@@ -9,7 +9,7 @@ import requests #import du module request
 from bs4 import BeautifulSoup #et de Bs4
 import csv 
 import pandas as pd
-import numpy as np 
+
 
 
 #rev3
@@ -62,25 +62,28 @@ def wikidata(id):
 @app.route("/permis/<int:depuis>/<int:jusque>")
 
 def permis(jusque, depuis):
-   
+
+
     jusque += 1
     
     datas = pd.read_csv("app/datas/auto-ecole-resultats.csv", delimiter=",", encoding='latin1') #encodage en latin1 pour respecter la norme ISO/CEI 8859-1
     
     nbr_candidats = datas["nbr_candidats"].tolist()
-    
     reussite = datas["reussite"].tolist()
 
+    #NOTA : les regex ne sont pas parfaites, certaines colonnes apparaissent vides "nan" mais ça suffira pour l'exercice.
     nom_ae = datas["localite_auto_ecole"].str.extract(r'(^[A-Z-\s]*)')[0].tolist() #les regex doivent forcément être insérés dans un groupe de capture (des parentèses)
-    
-#NOTA : les regex ne sont pas parfaites, certaines colonnes apparaissent vides "nan" mais ça suffira pour l'exercice.
-    code_postal = datas["localite_auto_ecole"].str.extract(r'([0-9]{5})', expand = True)[0].tolist()
-
-    ville = datas["localite_auto_ecole"].str.extract(r'[0-9]{5}\s(.*)', expand = True)[0].tolist() #Pour choisir un groupe de capture, il suffit de le mettre entre parenthèse, et lui seulement
-    
-    adresse = datas["localite_auto_ecole"].str.extract(r'([0-9].*)[0-9]{5}',expand = True)[0].tolist()
-    
+    code_postal = datas["localite_auto_ecole"].str.extract(r'([0-9]{5})')[0].tolist()
+    ville = datas["localite_auto_ecole"].str.extract(r'[0-9]{5}\s(.*)')[0].tolist() #Pour choisir un groupe de capture, il suffit de le mettre entre parenthèse, et lui seulement
+    adresse = datas["localite_auto_ecole"].str.extract(r'([0-9].*)[0-9]{5}')[0].tolist()
     donnees_combinees = list(zip(nom_ae, code_postal, ville, adresse, nbr_candidats, reussite)) #ZIP permet de combiner nos données en des tuples pour pouvoir les utiliser dans jinja (sinon cela ferait faire des boucles for dans des boucles for) il faut ensuite remettre ces tuples dans une liste pour pouvoir itérer 
+    
+    
+    return render_template("pages/app3-5.html", jusque=jusque, depuis=depuis, donnees_combinees = donnees_combinees)
+
 
     
-    return render_template("pages/app3.html", jusque=jusque, depuis=depuis, donnees_combinees = donnees_combinees)
+
+
+
+#rev6 

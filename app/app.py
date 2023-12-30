@@ -1,6 +1,7 @@
 from flask import Flask
 from .config import Config
 from flask_sqlalchemy import SQLAlchemy
+import flask_paginate   
 
 app = Flask(
     __name__, 
@@ -9,7 +10,6 @@ app = Flask(
 app.config.from_object(Config)
 
 db = SQLAlchemy(app) #database liée à notre application (instanciée)
-
 
 
 
