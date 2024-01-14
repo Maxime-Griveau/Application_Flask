@@ -1,0 +1,55 @@
+{% extends "partials/conteneur.html" %}
+
+{% block body %}
+
+    <div class="container">
+        <h1>Bienvenue sur l'application du Factbook!</h1>
+        <p>Voici le lien vers le site officiel : <a
+                href="https://www.cia.gov/the-world-factbook/">https://www.cia.gov/the-world-factbook/</a></p>
+        <p>Vous avez choisi d'afficher les données du pays suivant: {{pays}}</p>
+
+        <style type="text/css">
+            .tftable {font-size:12px;color:#333333;width:100%;border-width: 1px;border-color: #729ea5;border-collapse: collapse;}
+            .tftable th {font-size:12px;background-color:#acc8cc;border-width: 1px;padding: 8px;border-style: solid;border-color: #729ea5;text-align:left;}
+            .tftable tr {background-color:#d4e3e5;}
+            .tftable td {font-size:12px;border-width: 1px;padding: 8px;border-style: solid;border-color: #729ea5;}
+            .tftable tr:hover {background-color:#ffffff;}
+        </style>
+            {%if donnees%}
+            <table class="tftable" border="1">
+            
+            <tr>
+                <th>#</th>
+                <th>Nom</th>
+                <th>Type</th>
+                <th>Description</th>
+                <th>ID</th>
+            </tr>
+
+                {%for pays in donnees%}
+            <tr>
+                <th scope="row"> {{loop.index}} </th>
+                <td>
+                    {{pays.name}}
+                </td>
+                <td>
+                    {{pays.type}}
+                </td>
+                <td>
+                    {{pays.Introduction}}
+                </td>
+                <td>
+                    {{pays.id}}
+                </td>
+                {%endfor%}
+
+                
+            </tr>
+            </table>
+   {%endif%}
+            
+
+        
+    </div>
+
+{% endblock %}
