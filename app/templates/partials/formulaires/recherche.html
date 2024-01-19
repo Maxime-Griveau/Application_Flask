@@ -1,0 +1,29 @@
+<form action="{{url_for('recherche')}}"  name="recherche" method="post"> <!--La méthode doit absolument être à POST ici -->
+
+    {{form.hidden_tag()}} <!--Token caché localisédans le .env-->
+
+    <div class="form-group">
+        <label form="nom_pays">Nom du pays recherché </label>
+        {{form.nom_pays(class_="form-control", placeholder_="saisir la chaine à rechercher")}}
+            <!--Appel de notre formulaire avec un placeholder, son premier champ sera nom pays (instance de la classe Recherche)-->
+        <small id="nom_pays" class="form-text text-muted">Entrer tout ou partie du nom d'un
+            pays</small>
+            
+    </div>
+
+    <div class="form-group">
+        <label form="ressources">Ressource possédées</label>
+        {{form.ressources(class_="form-control")}} <!--Appel de notre formulaire ressource sans placeholder (car il en contient déjà un en tant que liste)-->
+        <small id="ressources" class="form-text text-muted">Sélectionner une ressource possédée dans le pays</small>
+  
+    </div>
+    
+    <p><input type="submit" value="Lancer la recherche"/> </p> <!--Permet d'envoyer notre formulaire à notre route -->
+</form>
+
+<form action = "{{url_for ('recherche')}}" method="post" name = "recherche">
+  
+    </form>
+    
+    
+    

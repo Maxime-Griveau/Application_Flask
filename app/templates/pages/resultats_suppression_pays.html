@@ -1,0 +1,55 @@
+{% extends "partials/conteneur.html" %}
+
+{% block body %}
+
+<div class="container">
+
+<!-- affichage en cas d'absence de résultats (lors du premier chargement de la page, ou d'absence de résultats suite à la recherche)-->
+{% if not donnees %}
+
+<div class="collapse show" id="collapseExample">
+    <div class="card card-body">
+        {% include "partials/formulaires/suppression_pays.html" %} 
+    </div>
+</div>
+
+
+{%else%}
+
+<!-- affichage caché du formulaire -->
+<div class="collapse show" id="collapseExample">
+    <div class="card card-body">
+        {% include "partials/formulaires/suppression_pays.html" %}
+    </div>
+</div>
+
+<!-- affichage des résultats -->
+<h1>Liste exhaustive de l'ensemble des pays contenus dans le Factbook</h1>
+<br>
+
+{% if pays_supprimee %}
+    <!-- afficher la nouvelle pays en tête -->
+    <ul class="list-group">
+        <li class="list-group-item active">{{ pays_supprimee.name }}</li>
+        <li class="list-group-item active">{{ pays_supprimee.id }}</li>
+    </ul>
+{% endif %}
+
+<!-- afficher les autres payss -->
+{% for pays in donnees %}
+    {% if not pays_supprimee or pays.id != pays_supprimee.id %}
+        <ul class="list-group">
+            <li class="list-group-item">{{ pays.name }}</li>
+            <li class="list-group-item">{{ pays.id }}</li>
+        </ul>
+    {% endif %}
+{% endfor %}
+
+              
+            
+
+
+{%endif%}
+
+{% endblock %}
+

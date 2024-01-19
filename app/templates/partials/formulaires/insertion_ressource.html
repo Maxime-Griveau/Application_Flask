@@ -1,0 +1,26 @@
+<form action="{{url_for('insertion_ressource')}}"  name="insertion_ressource" method="post"> <!--La méthode doit absolument être à POST ici -->
+
+    {{form.hidden_tag()}} <!--Token caché localisédans le .env-->
+
+    <div class="form-group">
+        <label form="nom_ressource">Nom de la ressource à ajouter </label>
+        {{form.nom_ressource(class_="form-control", placeholder_="saisir la chaine à ajouter")}}
+            <!--Appel de notre formulaire avec un placeholder, son premier champ sera nom pays (instance de la classe Recherche)-->
+        <small id="nom_ressource" class="form-text text-muted">Entrer tout ou partie du nom d'un
+            pays</small>
+            
+    </div>
+
+    <div class="form-group">
+        <label form="code_ressource">Code de la ressource à ajouter (3 caractères) </label>
+        {{form.code_ressource(class_="form-control", placeholder_="saisir le code à ajouter (3 caractères)")}} 
+        <small id="code_ressource" class="form-text text-muted">Ajouter un code à la ressource</small>
+  
+    </div>
+    
+    <p><input type="submit" value="Insérer"/> </p> <!--Permet d'envoyer notre formulaire à notre route -->
+</form>
+
+<form action = "{{url_for ('insertion_ressource')}}" method="post" name = "insertion_ressource">
+  
+    </form>

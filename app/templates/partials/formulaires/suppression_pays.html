@@ -1,0 +1,19 @@
+<form action="{{url_for('suppression_pays')}}"  name="suppression_pays" method="post"> <!--La méthode doit absolument être à POST ici -->
+
+    {{form.hidden_tag()}} <!--Token caché localisédans le .env-->
+
+    <div class="form-group">
+        <label form="nom_pays_del">Nom du pays à supprimer </label>
+        {{form.nom_pays_del(class_="form-control", placeholder_="saisir la chaine à supprimer")}}
+            <!--Appel de notre formulaire avec un placeholder, son premier champ sera nom pays (instance de la classe Recherche)-->
+        <small id="nom_pays_del" class="form-text text-muted">Entrer tout ou partie du nom d'un pays pour le supprimer</small>
+            
+    </div>
+
+    
+    <p><input type="submit" value="Supprimer"/>Toute suppression est irréversible</p> <!--Permet d'envoyer notre formulaire à notre route -->
+</form>
+
+<form action = "{{url_for ('suppression_pays')}}" method="post" name = "suppression_pays">
+  
+    </form>
