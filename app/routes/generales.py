@@ -1,9 +1,10 @@
 from ..app import app, db
-from flask import render_template, request, flash #flash permet l'affichage conditionnel d'informations à l'utilisateur (il faut avoir inséré le code pour Flash dans notre container)
+from flask import render_template, request, flash, abort #flash permet l'affichage conditionnel d'informations à l'utilisateur (il faut avoir inséré le code pour Flash dans notre container)
 from sqlalchemy import or_, text, any_
 from ..models.factbook import Country, Resources, Map, Area, Boundaries
 from ..utils.transformations import  clean_arg
 from ..models.formulaires import Recherche, AjoutRessource, SuppressionRessource, SuppressionPays
+
 
 
 @app.route("/")
@@ -16,9 +17,23 @@ def pays(page=1):
 
 @app.route("/pays/<string:nom_pays>")
 def un_pays(nom_pays):
-    return render_template("pages/un_pays.html", 
-        sous_titre=nom_pays, 
-        donnees= Country.query.filter(Country.name == nom_pays).first())
+    try: #on essaie
+        resultats = Country.query.filter(Country.name == nom_pays).first() #Si mon résultat
+
+        if resultats is None: #est égal à non (donc si ma requête ne donne aucun résultat)
+            # Si le pays n'est pas trouvé, déclencher une exception personnalisée
+            abort(500) #et bien j'aborte ! et je déclenche l'erreur 500 
+
+        return render_template("pages/un_pays.html", sous_titre=nom_pays, donnees=resultats)
+
+
+
+    except Exception as e: #et puis si vraiment il y a un soucis, eh erreur 404 
+        print("Une erreur est survenue :", str(e))
+        abort(404)
+
+
+
 
 @app.route("/continents")
 @app.route("/continents/<int:page>")
@@ -216,7 +231,7 @@ def suppression_ressource(page=1):
             print("Une erreur est surveneue : " + str(e))#Ça c'est l'erreur qui s'affichera dans les logs (back office)
             flash("Une erreur s'est produite lors de la suppression, la ressource existe-elle dans la base ?" + str(e), 'info') #ça c'est pour notre utilisateur ('error' ne produit pas de résultats semble-il)
             db.session.rollback() #on fait un rollback pour éviter de lock la base
-            
+            abort(500)
 
     return render_template("pages/resultats_suppression_ressource.html", sous_titre="Recherche", donnees=donnees, form=form, ressource_supprimee=ressource_supprimee)
 
@@ -254,6 +269,9 @@ def suppression_pays(page=1):
             print("Une erreur est surveneue : " + str(e))#Ça c'est l'erreur qui s'affichera dans les logs (back office)
             flash("Une erreur s'est produite lors de la suppression, le pays existe-il dans la base ?" + str(e), 'info') #ça c'est pour notre utilisateur ('error' ne produit pas de résultats semble-il)
             db.session.rollback() #on fait un rollback pour éviter de lock la base
-            
+            abort(500)
 
     return render_template("pages/resultats_suppression_pays.html", sous_titre="Recherche", donnees=donnees, form=form, pays_supprimee=pays_supprimee)
+
+
+

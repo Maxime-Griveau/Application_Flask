@@ -45,7 +45,9 @@
         <li class="nav-item active">
           <a class="nav-link" href="{{ url_for('suppression_pays') }}">Suppression de pays</a>
         </li>
-      
+        <li class="nav-item active">
+          <a class="nav-link" href="{{url_for('recherche')}}">Rechercher dans la base</a>          
+        </li>
       
         <div align="right">{% include "partials/formulaires/recherche_rapide.html" %}</div>
       </ul>
