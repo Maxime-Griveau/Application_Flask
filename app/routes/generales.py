@@ -28,9 +28,11 @@ def un_pays(nom_pays):
 
 
 
-    except Exception as e: #et puis si vraiment il y a un soucis, eh erreur 404 
+    except Exception as e: #et puis si vraiment il y a un soucis, eh bien erreur 404 ; le rolleback n'est pas nécessaire car cette requête ne modifie pas la base (non ?)
         print("Une erreur est survenue :", str(e))
         abort(404)
+        
+
 
 
 
