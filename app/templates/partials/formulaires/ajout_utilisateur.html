@@ -1,0 +1,32 @@
+<form action="{{url_for('insertion_utilisateur')}}" method="post" name="ajout_utilisateur">
+    {{form.hidden_tag()}} 
+
+
+    <div class="form-group">
+        <label for="mail">mail</label>
+        {{form.mail(class_="form-control", placeholder_="exemple : pierre.dupond@gmail.com")}}
+        <small id="mail" class="form-text text-muted">Entrer une adresse email</small>
+    </div>
+
+
+    <div class="form-group">
+        <label for="prenom">Prénom de l'utilisateur</label>
+        {{form.prenom(class_="form-control", placeholder_="saisir le prénom")}}
+  
+        <small id="prenom" class="form-text text-muted">Entrer le prénom de l'utilisateur</small>
+    </div>
+
+    <div class="form-group">
+        <label for="mot_de_passe">Mot de passe</label>
+        {{form.mot_de_passe(class_="form-control", placeholder_="saisir le mot de passe (6 caractères)")}}
+        <small id="mot_de_passe" class="form-text text-muted">Entrer un mot de passe</small>
+    </div>
+
+    
+
+    <p><input type="submit" value="Ajouter"></p>
+    <form action = "{{url_for ('insertion_utilisateur')}}" method="post" name = "insertion_utilisateur"></form>
+</form>
+
+
+
